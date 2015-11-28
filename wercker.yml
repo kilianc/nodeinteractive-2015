@@ -1,0 +1,19 @@
+box: kilianciuffolo/wercker:5.1.0
+
+build:
+  steps:
+    - npm-install
+    - script:
+        name: gulp build
+        code: node_modules/.bin/gulp build:dist
+
+deploy:
+  steps:
+    - s3sync:
+        key-id: $S3_KEY
+        key-secret: $S3_SECRET
+        bucket-url: $S3_BUCKET
+        source-dir: $S3_SOURCE
+  after-steps:
+    - slack-notifier:
+        url: $SLACK_WEBHOOK_URL

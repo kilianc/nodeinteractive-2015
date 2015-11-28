@@ -1,0 +1,44 @@
+// **
+// variables
+// **
+
+$spacing: 20px;
+$border-radius: 5px;
+$vertical-margin: 5%;
+
+$fonts: (
+  "Roboto": (
+    "Thin": (100, "normal"),
+    "ThinItalic": (100, "italic"),
+    "Light": (300, "normal"),
+    "LightItalic": (300, "italic"),
+    "Regular": (400, "normal"),
+    "Italic": (400, "italic"),
+    "Medium": (500, "normal"),
+    "MediumItalic": (500, "italic"),
+    "Bold": (700, "normal"),
+    "BoldItalic": (700, "italic"),
+    "Black": (900, "normal"),
+    "BlackItalic": (900, "italic"),
+  )
+);
+
+$color-laundry-day: darken(#374249, 20%);
+$color-cardboard: #404E57;
+$color-pita-chips: #E6E6E6;
+$color-salmon: #ec7b65;
+$color-crazy-puppet: #45A7B9;
+
+$background-opacity: 0.4;
+
+$headings-size-ratio: 5;
+$headings-margin: (
+  0.5em 0,
+  0.2em 0,
+  0.2em 0,
+  0.2em 0,
+  0.2em 0,
+  0.2em 0
+);
+
+$all-headings: h1, h2, h3, h4, h5, h6;

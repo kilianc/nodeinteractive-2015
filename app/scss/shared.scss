@@ -1,0 +1,271 @@
+// **
+// imports
+// **
+
+@import "variables";
+@import "bourbon";
+@import "neat";
+@import "mixins";
+@import "reset";
+@import "fonts";
+
+// **
+// general
+// **
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
+  font-family: "Roboto";
+  font-size: 3vw;
+  font-weight: 400;
+  letter-spacing: -1px;
+  color: #fff;
+  background-color: $color-laundry-day;
+}
+
+::selection {
+  color: #fff;
+  background: $color-cardboard;
+}
+
+a {
+  color: #fff;
+  font: inherit;
+
+  &:hover {
+    color: #45A7B9;
+  }
+}
+
+// **
+// section
+// **
+
+section {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  .content {
+    display: flex;
+    padding: 0 100px 5vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .side {
+    display: flex;
+    width: 33%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    overflow: auto;
+    background-color: darken($color-cardboard, 10%);
+  }
+
+  &[data-autoplay] > *,
+  [data-autoplay] > * {
+    animation-name: fadeIn;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeIn {
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #{$all-headings} {
+    max-width: 90vw;
+  }
+
+  p,
+  ul,
+  ol,
+  pre {
+    margin-top: $vertical-margin;
+    margin-bottom: $vertical-margin;
+    max-width: 90vw;
+    font-weight: 100;
+
+    &+* {
+      margin-top: 0;
+    }
+  }
+
+  strong {
+    font-weight: 400;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  ol {
+    list-style-position: outside;
+    margin-left: 4vh;
+    margin-bottom: 20px;
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  @for $i from 1 through 6 {
+    h#{$i} {
+      font-size: (1em + (6 - $i - 1) / $headings-size-ratio);
+      font-weight: 300;
+      line-height: 1.1em;
+      margin: nth($headings-margin, $i);
+      color: #fff;
+    }
+  }
+
+  figure {
+    display: flex;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    max-height: 50vh;
+    flex-shrink: 10;
+
+    &.rounded {
+      border-radius: $border-radius;
+    }
+  }
+
+  small {
+    font-size: 0.75em;
+  }
+
+  pre.prettyprint,
+  code {
+    font-family: monospace;
+    font-weight: 300;
+  }
+
+  pre.prettyprint {
+    flex-shrink: 0;
+    border: 0;
+    border-radius: $border-radius;
+    overflow-x: scroll;
+    padding: 15px;
+    min-width: 70vw;
+    word-wrap: break-word;
+    font-size: 0.7em;
+
+    code {
+      font-size: 1em;
+    }
+  }
+}
+
+// **
+// transitions
+// **
+
+section {
+  &.hidden {
+    display: none;
+  }
+}
+
+.fragment {
+  transition: all 0.5s $ease-out-quint;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+// **
+// available section layouts
+// **
+
+section.layout-side-left,
+section.layout-side-right {
+  align-items: stretch;
+
+  .content {
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  pre.prettyprint {
+    min-width: 100%;
+  }
+}
+
+section.layout-side-left {
+  flex-direction: row;
+}
+
+section.layout-side-right {
+  flex-direction: row-reverse;
+}
+
+body.layout-image-full-screen footer {
+  // display: none;
+}
+
+section.layout-image-full-screen {
+  flex-direction: row;
+  align-items: stretch;
+
+  figure {
+    flex: 1;
+    background-size: cover;
+  }
+}
+
+section.layout-center {
+  text-align: center;
+}
+
+// **
+// rest of the page
+// **
+
+footer {
+  position: absolute;
+  bottom: 5px;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  justify-content: flex-end;
+
+  img {
+    height: 4vh;
+    margin: 0 10px;
+  }
+}
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0vw;
+  height: 5px;
+  background-color: $color-crazy-puppet;
+  transition: all .5s ease-out;
+}

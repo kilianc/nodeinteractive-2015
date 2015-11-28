@@ -1,0 +1,79 @@
+// **
+// imports
+// **
+
+@import "variables";
+@import "bourbon";
+@import "neat";
+@import "mixins";
+@import "reset";
+@import "fonts";
+
+// **
+// general
+// **
+
+@page {
+  size: 21cm 29.7cm;
+  margin: 0cm !important;
+}
+
+html,
+body {
+  display: initial;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  font-size: 2vw;
+  margin: 0;
+}
+
+section {
+  height: 100%;
+  page-break-after: always !important;
+
+  #{$all-headings},
+  p,
+  ul,
+  ol,
+  pre {
+    max-width: 85%;
+  }
+
+  pre {
+    min-width: 70% !important;
+    max-width: 90%;
+  }
+}
+
+section.hidden {
+  display: flex !important;
+}
+
+.fragment.hidden {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+#kilian {
+  pre {
+    min-width: 130% !important;
+    max-width: 130% !important;
+  }
+}
+
+#tooling {
+  .side {
+    figure {
+      padding: 2.8vw;
+    }
+  }
+}
+
+#demo {
+  display: none !important;
+}
+
+#next::before {
+  display: none;
+}

@@ -1,0 +1,16 @@
+// **
+// imports
+// **
+
+@import "variables";
+@import "bourbon";
+
+// **
+// fonts
+// **
+
+@each $font-name, $font-weights in $fonts {
+  @each $font-weight-name, $font-weight-value in $font-weights {
+    @include font-face($font-name, "../fonts/#{$font-name}-#{$font-weight-name}", #{nth($font-weight-value, 1)}, #{nth($font-weight-value, 2)}, $file-formats: eot ttf woff);
+  }
+}

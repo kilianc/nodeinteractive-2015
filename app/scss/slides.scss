@@ -1,0 +1,241 @@
+// **
+// imports
+// **
+
+@import "variables";
+@import "bourbon";
+@import "neat";
+@import "mixins";
+
+// **
+// styles
+// **
+
+#cover {
+  @include alpha-background("../images/portland.jpg", 0.8, #000);
+
+  .content {
+    align-items: flex-start;
+    margin-top: -10%;
+
+    h4,
+    h5,
+    h6 {
+      font-weight: 100;
+    }
+
+    img {
+      width: 11vw;
+      margin-bottom: 20px;
+      opacity: 0.5;
+    }
+
+    figure {
+      position: absolute;
+      height: 40%;
+      background-position: top;
+      bottom: 0;
+      width: 90vw;
+      transform: translateX(-3.5vw);
+      background-color: transparent;
+      background-size: 70vw;
+      background-position: left top;
+    }
+  }
+}
+
+#kilian {
+  img {
+    height: 50vh;
+  }
+}
+
+#lukibear {
+  .side {
+    background-size: contain;
+    background-color: #f2f2f2;
+  }
+}
+
+#guidelines {
+  justify-content: flex-start;
+  .content {
+    align-items: flex-start;
+  }
+}
+
+#problem {
+  @include alpha-background("../images/terminals.png", $background-opacity, #000);
+}
+
+#whatif {
+  p {
+    text-align: center;
+  }
+  img {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 55%);
+  }
+}
+
+#pipes {
+  @include alpha-background("../images/pipes.gif", $background-opacity, #000);
+}
+
+#pipe-all-the-things {
+  figure {
+    background-size: contain;
+    background-color: white;
+    opacity: 0.9;
+  }
+}
+
+#demo {
+  background: #000;
+
+  figure {
+    background-size: contain;
+    background-color: black;
+  }
+}
+
+#how-it-works {
+  align-content: stretch;
+  align-items: stretch;
+
+  figure {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 80%;
+    background-color: $color-laundry-day;
+  }
+}
+
+#what-the-fudge {
+  h2 {
+    font-style: italic;
+    border-left: 0.5vw solid $color-salmon;
+    padding-left: 1.5vw;
+  }
+}
+
+#tons-micro-services {
+  @include alpha-background("../images/lotsofwindows.jpg", $background-opacity, #000);
+
+  background-repeat: repeat;
+  background-size: 100%;
+  animation: background-size 5s linear;
+  animation-fill-mode: forwards;
+
+  @keyframes background-size {
+    100% {
+      background-size: 1%;
+    }
+  }
+
+  &:before {
+    animation: opacity 5s linear;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes opacity {
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+#ui-history {
+  figure {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: contain !important;
+    background-color: $color-laundry-day;
+  }
+}
+
+#shaping {
+  @include alpha-background("../images/continuos-shaping.png", 0, #000);
+  background-size: 90%;
+
+  h2 {
+    flex: 1;
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    background-color: rgba(#000, 0.7);
+  }
+}
+
+#next {
+  @include alpha-background("../images/future.gif", $background-opacity, #000);
+}
+
+.next {
+  text-align: center;
+}
+
+#reach-out {
+  .team {
+    display: flex;
+    justify-content: space-between;
+    width: 70vw;
+    margin-top: $vertical-margin;
+
+    figure {
+      position: relative;
+      display: flex;
+      border-radius: $border-radius;
+      background-size: cover;
+      font-size: 0.5em;
+      padding: 5vw 10vw;
+      transition: all 0.5s $ease-in-out-quint;
+
+      &:first-child {
+        background-position: 50% 13%;
+      }
+
+      &:hover {
+        transform: scale(1.2);
+      }
+
+      a {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        align-items: center;
+        justify-content: center;
+        border-radius: $border-radius;
+        background-color: rgba(#000, 0.5);
+
+        &:hover {
+          background-color: rgba(#000, 0.7);
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  li {
+    text-align: center;
+  }
+}
+
+#thanks {
+  @include alpha-background("../images/san-francisco.jpg", 0.8, #000);
+  text-align: center;
+}

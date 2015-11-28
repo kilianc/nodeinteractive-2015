@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="apple-touch-icon" href="images/apple-touch-iphone.png">
+
+  <title>rtail | Terminal output to the browser in seconds, using UNIX pipes. (Node Interactive 2015)</title>
+
+  <!-- build:css(.) css/common.min.css -->
+  <link href="/app/css/google-code-prettify-dark.css" rel="stylesheet">
+  <link href="/node_modules/animate.css/source/_base.css" rel="stylesheet">
+  <link href="/node_modules/animate.css/source/attention_seekers/flash.css" rel="stylesheet">
+  <link href="/app/css/shared.css" rel="stylesheet">
+  <link href="/app/css/slides.css" rel="stylesheet">
+  <!-- endbuild -->
+  <!-- build:css(.) css/print.min.css media="print"-->
+  <link href="/app/css/print.css" media="print" rel="stylesheet">
+  <!-- endbuild -->
+
+  <link rel="icon" href="images/favicon-16x16.png" sizes="16x16">
+  <link rel="icon" href="images/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" href="images/favicon-48x48.png" sizes="48x48">
+  <link rel="icon" href="images/favicon-96x96.png" sizes="96x96">
+</head>
+<body class="home">
+
+  <section id="cover" data-layout="layout-image-full-screen">
+    <div class="content">
+      <img src="images/logo-nodeinteractive.png" alt="Node Interactive 2015">
+      <h4 class="type-fx">
+        >
+        <span class="command">echo "Node.js Interactive 2015"</span>
+        <span class="command">node app.js 2>&amp;1</span>
+        <span class="command">tail -F /var/log/redis.log</span>
+        <span class="command">npm test --bail --colors</span>
+        <span class="cursor animated infinite flash">_</span>| rtail
+      </h4>
+      <h5>Terminal output to the browser in seconds, using UNIX pipes</h5>
+      <h6>
+        <small><i>by <a href="https://twitter.com/@kilianciuffolo">@kilianciuffolo</a> &amp; <a href="https://twitter.com/@lucaorio_">@lucaorio_</a></i></small>
+      </h6>
+      <figure class="side" data-src="images/rtail-screenshot.png"></figure>
+    </div>
+  </section>
+
+  <section id="kilian" data-layout="layout-side-right">
+    <figure class="side" data-src="images/kilian.jpg">
+      <img class="fragment" src="images/trollface.png">
+    </figure>
+    <div class="content">
+      <h2><a href="https://twitter.com/kilianciuffolo">@kilianciuffolo</a></h2>
+      <h5><a href="https://github.com/kilianc">https://github.com/kilianc</a></h5>
+      <p>
+        Hi, I’m Kilian Ciuffolo – a Node.js addict with more than 10 years experience as a full stack developer
+      </p>
+      <pre class="prettyprint">
+        // http://wtfjs.com
+        typeof NaN === 'number' // ( ﾟヮﾟ)
+      </pre>
+    </div>
+  </section>
+
+  <section id="luca" data-layout="layout-side-left">
+    <figure class="side" data-src="images/luca.jpg"></figure>
+    <div class="content">
+      <h2><a href="https://twitter.com/lucaorio_">@lucaorio_</a></h2>
+      <h5><a href="https://behance.net/lucaorio">https://behance.net/lucaorio</a></h5>
+      <p>
+        Luca Orio / Product Designer from Italy
+      </p>
+    </div>
+  </section>
+
+  <section id="lukibear" data-layout="layout-side-left">
+    <figure class="side" data-src="images/logo-lukibear-square.png"></figure>
+    <div class="content">
+      <h2>lukibear</h2>
+      <h5><a href="https://lukibear.com">https://lukibear.com</a></h5>
+      <p>
+        We are a MVP dev shop based in <br>San Francisco
+      </p>
+    </div>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2><code>$ terminal | browser</code></h2>
+  </section>
+
+  <section>
+    <pre class="prettyprint">
+      $ DEBUG=myapp:* node server.js
+
+      200 GET /1/geocode?address=ny
+      200 GET /1/config
+      500 GET /1/users/556605ede9fa35333befa9e6/profile
+      200 POST /1/signin
+      200 GET /1/users/556605ede9fa35333befa9e6/profile
+      200 PUT /1/me/gcm_tokens/duUOo8jRIxq547jAaAHvsF9v
+    </pre>
+  </section>
+
+  <section>
+    <pre class="prettyprint lang-sh">
+      $ ssh -t kilian@staging "tail -F /var/log/api.log"
+    </pre>
+    <pre class="prettyprint lang-sh fragment">
+      $ ssh -t kilian@staging "tail -F /var/redis/redis.log"
+    </pre>
+  </section>
+
+  <section>
+    <pre class="prettyprint lang-sh">
+      $ ssh -t kilian@staging "tail -F /var/log/api.log"
+    </pre>
+    <pre class="prettyprint lang-sh">
+      $ ssh -t kilian@staging "tail -F /var/log/worker.log"
+    </pre>
+    <pre class="prettyprint lang-sh">
+      $ ssh -t kilian@staging "tail -F /var/log/webapp.log"
+    </pre>
+    <pre class="prettyprint lang-sh">
+      $ ssh -t kilian@staging "tail -F /var/redis/redis.log"
+    </pre>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>Often, monitoring microservices requires <i>O(N)</i> <code>ssh</code> sessions</h2>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>ssh ! security</h2>
+  </section>
+
+  <section id="problem" data-layout="layout-center">
+    <h2>Realtime monitoring is complicated</h2>
+  </section>
+
+  <section id="whatif">
+    <h2>What if...</h2>
+    <p data-autoplay="1">
+      <span>...we could aggregate all logs in one place,</span> <span> access them through a browser,</span> <span>without touching our source code</span> <span>with zero conf setup<br></span>
+    </p>
+    <p class="fragment">
+      <br><br><strong>and the UI didn't look like it was from 1985?</strong>
+    </p>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2><code>rtail(1)</code></h2>
+  </section>
+
+  <section id="rtail">
+    <pre class="prettyprint lang-sh">
+      $ npm i rtail -g
+      <code class="fragment">$ rtail-server --web-version stable</code>
+      <code class="fragment">$ echo "Hello World!" | rtail --name kilian</code>
+    </pre>
+    <img class="fragment rounded" src="images/gimme-five.gif">
+  </section>
+
+  <section id="pipes">
+    <h2>UNIX pipes WTF!</h2>
+  </section>
+
+  <section>
+    <pre class="prettyprint lang-sh">
+      # UNIX I/O redirection
+      $ node app.js 2>&1 | rtail --name api-server
+      $ mycommand | rtail > mycommand.log
+
+      <code class="fragment"># log files (log rotate safe!)
+      $ node app.js 2>&1 > api-server.log
+      $ tail -F api-server.log | rtail --name api-server</code>
+    </pre>
+  </section>
+
+  <section>
+    <pre class="prettyprint lang-sh">
+      # for fun and debugging
+      $ cat ~/kitten-ascii.txt | rtail
+      $ echo "Server rebooted!" | rtail --name $(hostname)
+    </pre>
+  </section>
+
+  <section id="pipe-all-the-things" data-layout="layout-image-full-screen">
+    <figure data-src="images/pipe-all-the-things.jpg"></figure>
+  </section>
+
+  <section>
+    <h2><a href="https://github.com/kilianc/rtail/blob/develop/cli/rtail-client.js#L112">Node.js <code>.pipe()</code></a></h2>
+    <pre class="prettyprint">
+      // simplified source code for rtail-cli.js
+
+      let baseMessage = { id: argv.id }
+
+      process.stdin
+        .pipe(split(null, null, { trailing: false })) // split lines
+        .on('data', function (line) {
+          baseMessage.content = line
+          let buffer = new Buffer(JSON.stringify(baseMessage))
+          socket.send(buffer, 0, buffer.length, argv.port, argv.host)
+        })
+    </pre>
+  </section>
+
+  <section id="demo" data-layout="layout-image-full-screen">
+    <figure data-src="images/demo.gif"></figure>
+  </section>
+
+  <section id="how-it-works">
+    <figure data-src="images/how-it-works-01.png"></figure>
+    <figure class="fragment" data-src="images/how-it-works-02.png"></figure>
+    <figure class="fragment" data-src="images/how-it-works-03.png"></figure>
+  </section>
+
+  <!-- luca:start -->
+
+  <section id="what-the-fudge" data-layout="layout-side-left">
+    <figure class="side" data-src="images/wtf.gif"></figure>
+    <div class="content">
+      <h2>“ What the F*&amp;k are you doing here? ”</h2>
+    </div>
+  </section>
+
+  <section>
+    <h2>I want your feedback!</h2>
+  </section>
+
+  <section>
+    <ul data-autoplay="1">
+      <li>Hassle-free configuration</li>
+      <li>Easy to use</li>
+      <li>You just need a terminal and a browser</li>
+    </ul>
+  </section>
+
+  <section id="tons-micro-services" data-autoplay="3">
+    <h2>One window to rule them all</h2>
+  </section>
+
+  <section id="ui-history" class="ui-breakdown">
+    <figure data-src="images/ui-analysis-00.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-01.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-02.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-03.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-04.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-05.png"></figure>
+    <figure class="fragment" data-src="images/ui-analysis-06.png"></figure>
+  </section>
+
+  <section id="shaping" data-autoplay="3">
+    <h2>Continuous shaping</h2>
+  </section>
+
+  <!-- luca:end -->
+
+  <section id="next" data-layout="layout-center">
+    <h2>What's next?</h2>
+  </section>
+
+  <section>
+    <h2><code>--help</code></h2>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>Implement infinite-scroll to support bigger backlogs and make it future proof</h2>
+    <h6><a href="https://github.com/kilianc/rtail/issues/102"><code>github.com/kilianc/rtail/issues/102</code></a></h6>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>Persistent Storage</h2>
+    <h6><a href="https://github.com/kilianc/rtail/issues/57"><code>github.com/kilianc/rtail/issues/57</code></a></h6>
+  </section>
+
+    <section data-layout="layout-center">
+    <h2>Authorization and team management <br> with GitHub</h2>
+    <h6><a href="https://github.com/kilianc/rtail/issues/44"><code>github.com/kilianc/rtail/issues/44</code></a></h6>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>Statistics</h2>
+    <h6><a href="https://github.com/kilianc/rtail/issues/24"><code>github.com/kilianc/rtail/issues/24</code></a></h6>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>Catch-all Docker logs image</h2>
+    <h6><code>(TBD) needs its own repo</code></h6>
+  </section>
+
+  <section data-layout="layout-center">
+    <h2>DTLS</h2>
+    <h6><a href="https://github.com/nodejs/node/issues/2398"><code>github.com/nodejs/node/issues/2398</code></a></h6>
+  </section>
+
+  <section id="reach-out">
+    <h2>Reach out! <i>(we are hiring)</i></h2>
+    <div class="team">
+      <figure data-src="images/logo-lukibear-square.png">
+        <a href="mailto:info@lukibear.com">info@lukibear.com</a>
+      </figure>
+      <figure data-src="images/kilian.jpg">
+        <a href="https://twitter.com/kilianciuffolo">@kilianciuffolo</a>
+      </figure>
+      <figure data-src="images/luca-square.jpg">
+        <a href="https://twitter.com/lucaorio_">@lucaorio_</a>
+      </figure>
+    </div>
+    <ul>
+      <li><a href="http://rtail.org">rtail.org</a></li>
+      <li><a href="https://github.com/kilianc/rtail">github.com/kilianc/rtail</a></li>
+    </ul>
+  </section>
+
+  <section id="thanks">
+    <h6><i>This has been</i></h6>
+    <h1>Terminal output to the browser in seconds, using UNIX pipes</h1>
+    <h6><i>by <a href="https://twitter.com/@kilianciuffolo">@kilianciuffolo</a> &amp; <a href="https://twitter.com/@lucaorio_">@lucaorio_</a></i></h6>
+    <h1><i>Thanks!</i></h1>
+  </section>
+
+  <footer>
+    <a href="http://events.linuxfoundation.org/events/node-interactive"><img src="images/logo-nodeinteractive.png" alt="Node Interactive 2015"></a>
+    <a href="https://lukibear.com"><img src="images/logo-lukibear.png" alt="lukibear, LLC"></a>
+  </footer>
+
+  <div class="progress"></div>
+
+  <!-- build:js(.) scripts/common.min.js -->
+  <script src="/app/scripts/google-analytics.js"></script>
+  <script src="/app/scripts/google-code-prettify.js"></script>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/app/scripts/navigation.js"></script>
+  <script src="/app/scripts/type-fx.js"></script>
+  <script src="/app/scripts/main.js"></script>
+  <!-- endbuild -->
+</body>
+</html>
